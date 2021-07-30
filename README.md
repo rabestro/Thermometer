@@ -1,6 +1,6 @@
 # How to use Formattable interface
 
-## User class Thermometer
+## class Thermometer
 
 ```java
 import lombok.AllArgsConstructor;
@@ -63,6 +63,7 @@ System.out
 ```
 
 ### Output
+
 ```text
 lv.id.jc.thermometer.Thermometer@3fee733d
 
@@ -70,4 +71,41 @@ Scale: 23.190000
 State: Normal
 Thermometer: lv.id.jc.thermometer.Thermometer@3fee733d
 Thermometer: 23.2° (Normal)
+```
+
+## Method toString()
+
+```java
+@Override
+public String toString() {
+    return String.format("%+6.1f° (%s)", scale, state);
+}
+```
+
+### Code
+```java
+System.out.println(thermometer);
+System.out.println();
+
+System.out
+        .format("Thermometer: | %30s |%n", thermometer)
+        .format("Thermometer: | %-30s |%n", thermometer)
+```
+
+### Output
+```text
+ -29.8° (Normal)
+
+Thermometer: |               -29.8° (Normal) |
+Thermometer: |  -29.8° (Normal)              |
+```
+
+We still do not have enough options to format output. No precision. No control what to output.
+What we desire is like this different formats:
+```text
+Thermometer: +36.565129°
+Thermometer: High
+Thermometer: +37° (H)
+Thermometer: +37°
+Thermometer: +36.6°
 ```

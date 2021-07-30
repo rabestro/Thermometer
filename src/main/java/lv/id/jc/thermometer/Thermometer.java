@@ -38,4 +38,9 @@ public class Thermometer {
         final var scale = min(State.Maximum.value, max(State.Minimum.value, temperature));
         return new Thermometer(scale, State.of(temperature));
     }
+
+    @Override
+    public String toString() {
+        return String.format("%+6.1f° (%s)", scale, state);
+    }
 }
