@@ -15,7 +15,7 @@ public class Substance {
     private double temperature;
 
     public Substance() {
-        this.temperature = NORMAL_TEMPERATURE;
+        this.temperature = getRandomTemperature();
     }
 
     private static double getRandomTemperature() {
