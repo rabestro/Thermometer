@@ -3,11 +3,15 @@ package lv.id.jc.thermometer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Formattable;
+import java.util.FormattableFlags;
+import java.util.Formatter;
+
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 @Getter
-public class Thermometer {
+public class Thermometer implements Formattable {
     private Thermometer(final double scale, final State state) {
         this.scale = scale;
         this.state = state;
@@ -43,4 +47,22 @@ public class Thermometer {
     public String toString() {
         return String.format("%+6.1f° (%s)", scale, state);
     }
+
+    @Override
+    public void formatTo(final Formatter formatter, final int flags, final int width, final int precision) {
+        final var isUpperCase = (FormattableFlags.UPPERCASE & flags) > 0;
+        final var isLeftJustify = (FormattableFlags.LEFT_JUSTIFY & flags) > 0;
+//        final var template = new StringBuilder();
+//        if (precision > -1) {
+//
+//        }
+        if (precision == -1) {
+            final var template = "%"
+                    + (isLeftJustify ? "-" : "")
+                    + (width > 0 ? String.valueOf(width) : "")
+                    + (isUpperCase ? "S" : "s");
+            formatter.format(template, state);
+        }
+    }
+
 }

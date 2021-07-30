@@ -5,9 +5,24 @@ public class Main {
 
     public static void main(String[] args) {
         final var substance = new Substance();
-
         final var thermometer = Thermometer.of(substance.getTemperature());
 
+        printFormatted(thermometer);
+    }
+
+    static void printFormatted(final Thermometer thermometer) {
+        System.out
+                .printf("|%s|%n", thermometer)
+                .printf("|%S|%n", thermometer)
+                .printf("|%20S|%n", thermometer)
+                .printf("|%20s|%n", thermometer)
+                .printf("|%-20s|%n", thermometer)
+                .printf("|%-20S|%n", thermometer)
+                .printf("|%-3.0s|%n", thermometer)
+        ;
+    }
+
+    static void printCard(final Thermometer thermometer) {
         System.out.println(thermometer);
         System.out.println();
 
@@ -15,6 +30,8 @@ public class Main {
                 .format(LINE)
                 .format("Thermometer: | %30s |%n", thermometer)
                 .format("Thermometer: | %-30s |%n", thermometer)
+                .format("Thermometer: | %30S |%n", thermometer)
+                .format("Thermometer: | %-30S |%n", thermometer)
                 .format(LINE)
                 .format("Thermometer: | %+6.0f° %-21s |%n", thermometer.getScale(), "(" + thermometer.getState() + ")")
                 .format("Thermometer: | %+6.1f° %-21s |%n", thermometer.getScale(), "(" + thermometer.getState() + ")")
