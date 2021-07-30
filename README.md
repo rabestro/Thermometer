@@ -1,5 +1,8 @@
-package lv.id.jc.thermometer;
+# How to use Formattable interface
 
+## User class Thermometer
+
+```java
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -39,3 +42,32 @@ public class Thermometer {
         return new Thermometer(scale, State.of(temperature));
     }
 }
+
+```
+
+Sample output without implementation of toString method.
+
+### Code
+
+```java
+final var thermometer = Thermometer.of(23.19);
+
+System.out.println(thermometer);
+System.out.println();
+
+System.out
+        .printf("Scale: %f%n", thermometer.getScale())
+        .printf("State: %s%n", thermometer.getState())
+        .printf("Thermometer: %s%n", thermometer)
+        .printf("Thermometer: %4.1f° (%s)%n", thermometer.getScale(), thermometer.getState());
+```
+
+### Output
+```text
+lv.id.jc.thermometer.Thermometer@3fee733d
+
+Scale: 23.190000
+State: Normal
+Thermometer: lv.id.jc.thermometer.Thermometer@3fee733d
+Thermometer: 23.2° (Normal)
+```
