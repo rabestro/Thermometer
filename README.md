@@ -1,6 +1,6 @@
 # How to use Formattable interface
 
-## User class Thermometer
+## class Thermometer
 
 ```java
 import lombok.AllArgsConstructor;
@@ -63,6 +63,7 @@ System.out
 ```
 
 ### Output
+
 ```text
 lv.id.jc.thermometer.Thermometer@3fee733d
 
