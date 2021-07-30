@@ -109,3 +109,63 @@ Thermometer: +37° (H)
 Thermometer: +37°
 Thermometer: +36.6°
 ```
+
+## Implementation of interface Formattable
+
+```java
+@Override
+public void formatTo(final Formatter formatter, final int flags, final int width, final int precision) {
+    final var isUpperCase = (FormattableFlags.UPPERCASE & flags) > 0;
+    final var isLeftJustify = (FormattableFlags.LEFT_JUSTIFY & flags) > 0;
+
+    final var scaleTemplate = precision == -1 ? "" : " %1$+" + (4 + precision) + "." + precision + "f° ";
+    final var stateTemplate = precision == -1 || width > 14 + precision ? "%2$s" : "";
+    final var template = isLeftJustify ? scaleTemplate + stateTemplate : stateTemplate + scaleTemplate;
+
+    final var output = String.format(template, scale, state);
+
+    final var justify = "%"
+            + (isLeftJustify ? "-" : "")
+            + (width > 0 ? String.valueOf(width) : "")
+            + (isUpperCase ? "S" : "s");
+
+    formatter.format(justify, output);
+}
+```
+### Code 
+```java
+System.out
+        .format("Thermometer: %20s %n", thermometer())
+        .format("Thermometer: %-20s %n", thermometer())
+        .format("Thermometer: %20S %n", thermometer())
+        .format("Thermometer: %-20S %n", thermometer())
+        .format("Thermometer: %.0s %n", thermometer())
+        .format("Thermometer: %.1s %n", thermometer())
+        .format("Thermometer: %.2s %n", thermometer())
+        .format("Thermometer: %.3s %n", thermometer())
+        .format("Thermometer: %-18.2s %n", thermometer())
+        .format("Thermometer: %-18.2s %n", thermometer())
+        .format("Thermometer: %18.2s %n", thermometer())
+        .format("Thermometer: %18.2s %n", thermometer())
+        .format("Thermometer: %18.2S %n", thermometer())
+        .format("Thermometer: %18.2S %n", thermometer())
+;
+```
+### Output
+
+```text
+Thermometer:               Normal 
+Thermometer: Normal               
+Thermometer:               NORMAL 
+Thermometer: HIGH                 
+Thermometer:   +32°  
+Thermometer:  +34.4°  
+Thermometer:  +42.96°  
+Thermometer:  +34.117°  
+Thermometer:  +27.36° Normal   
+Thermometer:  +33.00° High     
+Thermometer:   Normal +24.94°  
+Thermometer:   Normal +17.85°  
+Thermometer:   NORMAL +10.36°  
+Thermometer:   NORMAL  +4.15° 
+```
