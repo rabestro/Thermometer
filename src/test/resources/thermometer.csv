@@ -1,23 +1,23 @@
-Temperature, Scale, State
-220, 50, Maximum
-180.98, 50, Maximum
-70.1, 50, Maximum
-50, 50, Maximum
-49.99, 49.99, High
-42, 42, High
-30.01, 30.01, High
-30, 30, High
-29.99, 29.99, Normal
-29, 29, Normal
-12, 12, Normal
-0, 0, Normal
--9, -9, Normal
--29.99, -29.99, Normal
--30, -30, Low
--30.01, -30.01, Low
--38, -38, Low
--49.99, -49.99, Low
--50, -50, Minimum
--50.01, -50, Minimum
--90, -50, Minimum
--101, -50, Minimum
+Temperature,Scale ,State
+220        ,50    ,Maximum
+180.98     ,50    ,Maximum
+70.1       ,50    ,Maximum
+50         ,50    ,Maximum
+49.99      ,49.99 ,High
+42         ,42    ,High
+30.01      ,30.01 ,High
+30         ,30    ,High
+29.99      ,29.99 ,Normal
+29         ,29    ,Normal
+12         ,12    ,Normal
+0          ,0     ,Normal
+-9         ,-9    ,Normal
+-29.99     ,-29.99,Normal
+-30        ,-30   ,Low
+-30.01     ,-30.01,Low
+-38        ,-38   ,Low
+-49.99     ,-49.99,Low
+-50        ,-50   ,Minimum
+-50.01     ,-50   ,Minimum
+-90        ,-50   ,Minimum
+-101       ,-50   ,Minimum
