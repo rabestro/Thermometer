@@ -44,7 +44,7 @@ public class Thermometer implements Formattable {
         return new Thermometer(scale, State.of(temperature));
     }
 
-    public static Thermometer of(final String temperature) {
+    public static Thermometer parse(final String temperature) {
         return Thermometer.of(Double.parseDouble(temperature));
     }
 
@@ -58,25 +58,24 @@ public class Thermometer implements Formattable {
         final var isUpperCase = (FormattableFlags.UPPERCASE & flags) > 0;
         final var isLeftJustify = (FormattableFlags.LEFT_JUSTIFY & flags) > 0;
         final var isAlternate = (FormattableFlags.ALTERNATE & flags) > 0;
-        final var scaleTemplate
-                = precision == -1 ? ""
-                : precision == 0 ? "%1$+3.0f°"
-                : "%1$+" + (4 + precision) + "." + precision + "f°";
-        final var scaleOut = String.format(scaleTemplate, scale);
 
-        final var stateTemplate = precision == -1 || width > 13 + precision ? "%2$s" : "";
-        final var delimiter = stateTemplate.isEmpty() || scaleTemplate.isEmpty() ? "" : " ";
-        final var template = isLeftJustify
-                ? scaleTemplate + delimiter + stateTemplate
-                : stateTemplate + delimiter + scaleTemplate;
-
-        final var output = String.format(template, scale, state);
-        final var justify = "%"
+        final String output;
+        if (precision == -1) {
+            final var stateName = isAlternate ? state.name() : state.name().toLowerCase();
+            final var stateTemplate = "%" + (width > 0 ? "." + width : "") + "s";
+            output = String.format(stateTemplate, stateName);
+        } else {
+            final var degreeWidth = precision == 0 ? 3 : 4 + precision;
+            final var degreeSymbol = isAlternate ? "F" : "C";
+            final var degreeTemplate = "%1$+" + degreeWidth + "." + precision + "f°" + degreeSymbol;
+            output = String.format(degreeTemplate, isAlternate ? scale * 1.8 + 32 : scale);
+        }
+        final var template = "%"
                 + (isLeftJustify ? "-" : "")
                 + (width > 0 ? String.valueOf(width) : "")
                 + (isUpperCase ? "S" : "s");
 
-        formatter.format(justify, output);
+        formatter.format(template, output);
     }
 
     public String getGraphScale(final int width) {

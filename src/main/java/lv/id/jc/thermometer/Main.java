@@ -22,7 +22,7 @@ public class Main {
         System.out.println();
 
         System.out
-                .format("Thermometer: %20s %n", thermometer())
+                .format("Thermometer: %1s %n", thermometer())
                 .format("Thermometer: %-20s %n", thermometer())
                 .format("Thermometer: %20S %n", thermometer())
                 .format("Thermometer: %-20S %n", thermometer())
@@ -38,7 +38,7 @@ public class Main {
                 .format("Thermometer: %18.2S %n", thermometer())
         ;
 
-        testFormat("%-18.2s, ");
+        testFormat("%.2s, ");
     }
 
     static void testFormat(final String format) {
