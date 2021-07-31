@@ -1,8 +1,11 @@
 package lv.id.jc.thermometer;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+
+import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,10 +20,21 @@ class ThermometerTest {
         assertEquals(expectedScale, thermometer.getScale());
     }
 
-    @ParameterizedTest(name = "Temperature: {1}°, \"{1}\" = {2}")
-    @CsvFileSource(resources = "/format-value-tostring.csv", numLinesToSkip = 1)
-    void testToString(final String format, final double temperature, final String expected) {
-        final var actual = String.format(format, Thermometer.of(temperature));
+//    @ParameterizedTest(name = "Temperature: {1}°, \"{1}\" = {2}")
+//    @CsvFileSource(resources = "/format-value-tostring.csv", numLinesToSkip = 1)
+//    void testToString(final String format, final double temperature, final String expected) {
+//        final var thermometer = Thermometer.of(temperature);
+//        final var actual = String.format(format, thermometer.toString());
+//        assertEquals(expected, actual);
+//    }
+
+    @ParameterizedTest(name = "Temperature: {0}°, Expected = {1}")
+    @CsvFileSource(resources = "/toString.csv", numLinesToSkip = 1, encoding = "windows-1252")
+    void testToString(final double temperature, final String expected) {
+        final var thermometer = Thermometer.of(temperature);
+        final var actual = thermometer.toString();
         assertEquals(expected, actual);
     }
+
+
 }

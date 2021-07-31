@@ -11,6 +11,7 @@ public class Main {
         printCard();
     }
 
+    
     static Thermometer thermometer() {
         substance.waitSomeTime();
         return Thermometer.of(substance.getTemperature());
