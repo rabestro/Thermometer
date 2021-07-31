@@ -2,6 +2,7 @@ package lv.id.jc.thermometer;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -9,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 @DisplayName("Thermometer class")
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ThermometerTest {
 
     @DisplayName("must create the object correctly")
@@ -41,9 +43,9 @@ class ThermometerTest {
     }
 
     @DisplayName("should implement Formattable interface")
-    @ParameterizedTest(name = "Format: \"{0}\", Temperature: {1}°, Expected: {2}")
-    @CsvFileSource(resources = "/format.csv", numLinesToSkip = 1, encoding = "windows-1252")
-    void formatTo(final String format, final Thermometer thermometer, final String expected) {
+    @ParameterizedTest(name = "Temperature: {0}°, Format: \"{1}\", Expected: {2}")
+    @CsvFileSource(resources = "/thermometer-format-to.csv", numLinesToSkip = 1, encoding = "windows-1252")
+    void formatTo(final Thermometer thermometer, final String format, final String expected) {
         assertEquals(expected, String.format(format, thermometer));
     }
 
