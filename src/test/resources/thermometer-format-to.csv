@@ -1,10 +1,4 @@
-# Parameters for unit test of implementation of Formattable interface
-# Thermometer::formatTo
-#
 Thermometer,Format                                       ,Expected Output
-#
-# When no precision specified only state should be printed
-#
 -50        ,%s                                           ,minimum
 -50        ,%S                                           ,MINIMUM
 -50        ,%#s                                          ,Minimum
@@ -21,9 +15,6 @@ Thermometer,Format                                       ,Expected Output
 24         ,	[%-10S]                                     ,[NORMAL    ]
 30         ,%#s                                          ,High
 50         ,%#s                                          ,Maximum
-#
-# If any precision specified then degree should be printed instead of state
-#
 -51.23     ,%.1s                                         ,-50.0°C
 -49.99     ,%.1s                                         ,-50.0°C
 -50        ,%#.1s                                        ,-58.0°F
