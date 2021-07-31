@@ -17,7 +17,7 @@ class ThermometerTest {
         assertEquals(expectedScale, thermometer.getScale());
     }
 
-    @ParameterizedTest(name = "Temperature: {0}°, Expected = {1}")
+    @ParameterizedTest(name = "Temperature: {0}°C, Expected = {1}")
     @CsvFileSource(resources = "/to-string.csv", numLinesToSkip = 1, encoding = "windows-1252")
     void testToString(final double temperature, final String expected) {
         final var thermometer = Thermometer.of(temperature);
