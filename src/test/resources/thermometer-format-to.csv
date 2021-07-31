@@ -28,9 +28,6 @@ Thermometer,Format                                       ,Expected Output
 -0         ,[%12.1s]                                     ,[     -0.0°C]
 0          ,[%12.1s]                                     ,[     +0.0°C]
 0          ,[%#12.1s]                                    ,[    +32.0°F]
-#
-# We can point to the same variable multiple times using an argument reference
-#
 0          ,%1$.1s = %1$#.1s                             ," +0.0°C = +32.0°F"
 31         ,"Temperature: %1$.0s (%1$#.0s), State: %1$S.","Temperature: +31°C (+88°F), State: HIGH."
 
