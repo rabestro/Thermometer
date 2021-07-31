@@ -58,17 +58,18 @@ public class Thermometer implements Formattable {
         final var isUpperCase = (FormattableFlags.UPPERCASE & flags) > 0;
         final var isLeftJustify = (FormattableFlags.LEFT_JUSTIFY & flags) > 0;
         final var isAlternate = (FormattableFlags.ALTERNATE & flags) > 0;
-
         final String output;
+
         if (precision == -1) {
             final var stateName = isAlternate ? state.name() : state.name().toLowerCase();
             final var stateTemplate = "%" + (width > 0 ? "." + width : "") + "s";
             output = String.format(stateTemplate, stateName);
         } else {
             final var degreeWidth = precision == 0 ? 3 : 4 + precision;
+            final var degreeValue = isAlternate ? scale * 1.8 + 32 : scale;
             final var degreeSymbol = isAlternate ? "F" : "C";
             final var degreeTemplate = "%1$+" + degreeWidth + "." + precision + "f°" + degreeSymbol;
-            output = String.format(degreeTemplate, isAlternate ? scale * 1.8 + 32 : scale);
+            output = String.format(degreeTemplate, degreeValue);
         }
         final var template = "%"
                 + (isLeftJustify ? "-" : "")
