@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Thermometer class")
 class ThermometerTest {
 
-    @DisplayName("should implement of()")
+    @DisplayName("must create the object correctly")
     @ParameterizedTest(name = "Temperature: {0}°, Thermometer: {1}° ({2})")
     @CsvFileSource(resources = "/thermometer.csv", numLinesToSkip = 1)
     void of(final double temperature, final double expectedScale, final Thermometer.State expectedState) {
