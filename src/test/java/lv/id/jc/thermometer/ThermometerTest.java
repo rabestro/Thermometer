@@ -25,12 +25,13 @@ class ThermometerTest {
         assertEquals(expected, actual);
     }
 
-//    @ParameterizedTest(name = "Temperature: {1}°, \"{1}\" = {2}")
-//    @CsvFileSource(resources = "/format-value-tostring.csv", numLinesToSkip = 1)
-//    void testToString(final String format, final double temperature, final String expected) {
-//        final var thermometer = Thermometer.of(temperature);
-//        final var actual = String.format(format, thermometer.toString());
-//        assertEquals(expected, actual);
-//    }
+    @ParameterizedTest(name = "Temperature: {1}°, \"{0}\" = {2}")
+    @CsvFileSource(resources = "/format-value-tostring.csv", numLinesToSkip = 1, encoding = "windows-1252")
+    void testToStringPlusFormat(final String format, final double temperature, final String expected) {
+        final var thermometer = Thermometer.of(temperature);
+        final var toString = String.valueOf(thermometer);
+        final var actual = String.format(format, toString);
+        assertEquals(expected, actual);
+    }
 
 }
