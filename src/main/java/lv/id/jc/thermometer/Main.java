@@ -1,5 +1,8 @@
 package lv.id.jc.thermometer;
 
+import java.util.stream.DoubleStream;
+import java.util.stream.Stream;
+
 public class Main {
     private static final String LINE = "-------------+--------------------------------+%n";
     private static final Substance substance = new Substance();
@@ -33,5 +36,14 @@ public class Main {
                 .format("Thermometer: %18.2S %n", thermometer())
                 .format("Thermometer: %18.2S %n", thermometer())
         ;
+
+        testFormat("%-18.2s, ");
+    }
+
+    static void testFormat(final String format) {
+        DoubleStream
+                .of(51, 42.682, 24.974, -12.863, -31.098, -50.001)
+                .mapToObj(Thermometer::of)
+                .forEach(thermometer -> System.out.format(format, thermometer));
     }
 }
