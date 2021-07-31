@@ -10,3 +10,10 @@ Temperature, toString
 -30.0001, -30.0° Low
 -30.009, -30.0° Low
 -29.95, -30.0° Normal
+-18.56, -18.6° Normal
+-9.943," -9.9° Normal"
+-9.943," -9.9° Normal"
+-0.001," -0.0° Normal"
+-0," -0.0° Normal"
+0," +0.0° Normal"
++0," +0.0° Normal"
