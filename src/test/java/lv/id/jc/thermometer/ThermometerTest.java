@@ -43,4 +43,14 @@ class ThermometerTest {
 
     }
 
+    @DisplayName("should implement Formattable interface")
+    @ParameterizedTest(name = "Format: \"{0}\", Temperature: {1}°, Expected: {2}")
+    @CsvFileSource(resources = "/format.csv", numLinesToSkip = 1, encoding = "windows-1252")
+    void formatTo(final String format, final double temperature, final String expected) {
+        final var thermometer = Thermometer.of(temperature);
+        final var actual = String.format(format, thermometer);
+        assertEquals(expected, actual);
+    }
+
+
 }
