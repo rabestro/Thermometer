@@ -13,9 +13,24 @@ class ThermometerTest {
     @CsvFileSource(resources = "/thermometer.csv", numLinesToSkip = 1)
     void of(final double temperature, final double expectedScale, final Thermometer.State expectedState) {
         final var thermometer = Thermometer.of(temperature);
-        assertAll(
-                () -> assertSame(expectedState, thermometer.getState()),
-                () -> assertEquals(expectedScale, thermometer.getScale())
-        );
+        assertSame(expectedState, thermometer.getState());
+        assertEquals(expectedScale, thermometer.getScale());
     }
+
+    @ParameterizedTest(name = "Temperature: {0}°, Expected = {1}")
+    @CsvFileSource(resources = "/to-string.csv", numLinesToSkip = 1, encoding = "windows-1252")
+    void testToString(final double temperature, final String expected) {
+        final var thermometer = Thermometer.of(temperature);
+        final var actual = thermometer.toString();
+        assertEquals(expected, actual);
+    }
+
+//    @ParameterizedTest(name = "Temperature: {1}°, \"{1}\" = {2}")
+//    @CsvFileSource(resources = "/format-value-tostring.csv", numLinesToSkip = 1)
+//    void testToString(final String format, final double temperature, final String expected) {
+//        final var thermometer = Thermometer.of(temperature);
+//        final var actual = String.format(format, thermometer.toString());
+//        assertEquals(expected, actual);
+//    }
+
 }
