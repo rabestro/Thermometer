@@ -41,8 +41,8 @@ public class Thermometer implements Formattable {
     private final State state;
 
     public static Thermometer of(final double temperature) {
-        val scale = min(State.Maximum.value, max(State.Minimum.value, temperature));
-        return new Thermometer(scale, State.of(temperature));
+        val value = min(State.Maximum.value, max(State.Minimum.value, temperature));
+        return new Thermometer(value, State.of(temperature));
     }
 
     public static Thermometer parse(final String temperature) {
