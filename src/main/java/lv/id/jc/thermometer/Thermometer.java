@@ -2,6 +2,7 @@ package lv.id.jc.thermometer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.val;
 
 import java.util.Formattable;
 import java.util.FormattableFlags;
@@ -40,7 +41,7 @@ public class Thermometer implements Formattable {
     private final State state;
 
     public static Thermometer of(final double temperature) {
-        final var scale = min(State.Maximum.value, max(State.Minimum.value, temperature));
+        val scale = min(State.Maximum.value, max(State.Minimum.value, temperature));
         return new Thermometer(scale, State.of(temperature));
     }
 
@@ -55,23 +56,23 @@ public class Thermometer implements Formattable {
 
     @Override
     public void formatTo(final Formatter formatter, final int flags, final int width, final int precision) {
-        final var isUpperCase = (FormattableFlags.UPPERCASE & flags) > 0;
-        final var isLeftJustify = (FormattableFlags.LEFT_JUSTIFY & flags) > 0;
-        final var isAlternate = (FormattableFlags.ALTERNATE & flags) > 0;
+        val isUpperCase = (FormattableFlags.UPPERCASE & flags) > 0;
+        val isLeftJustify = (FormattableFlags.LEFT_JUSTIFY & flags) > 0;
+        val isAlternate = (FormattableFlags.ALTERNATE & flags) > 0;
         final String output;
 
         if (precision == -1) {
-            final var stateName = isAlternate ? state.name().toLowerCase() : state.name();
-            final var stateTemplate = "%" + (width > 0 ? "." + width : "") + "s";
+            val stateName = isAlternate ? state.name().toLowerCase() : state.name();
+            val stateTemplate = "%" + (width > 0 ? "." + width : "") + "s";
             output = String.format(stateTemplate, stateName);
         } else {
-            final var degreeWidth = precision == 0 ? 3 : 4 + precision;
-            final var degreeValue = isAlternate ? value * 1.8 + 32 : value;
-            final var degreeSymbol = isAlternate ? "F" : "C";
-            final var degreeTemplate = "%1$+" + degreeWidth + "." + precision + "f°" + degreeSymbol;
+            val degreeWidth = precision == 0 ? 3 : 4 + precision;
+            val degreeValue = isAlternate ? value * 1.8 + 32 : value;
+            val degreeSymbol = isAlternate ? "F" : "C";
+            val degreeTemplate = "%1$+" + degreeWidth + "." + precision + "f°" + degreeSymbol;
             output = String.format(degreeTemplate, degreeValue);
         }
-        final var template = "%"
+        val template = "%"
                 + (isLeftJustify ? "-" : "")
                 + (width > 0 ? String.valueOf(width) : "")
                 + (isUpperCase ? "S" : "s");
@@ -80,11 +81,11 @@ public class Thermometer implements Formattable {
     }
 
     public String getGraphScale(final int width) {
-        final var minimumMarks = 10;
-        final var specialMarks = 3;
-        final int marks = Math.max(minimumMarks, width - specialMarks);
-        final var sb = new StringBuilder(marks + specialMarks).append('[');
-        final var delta = (State.Maximum.value - State.Minimum.value) / marks;
+        val minimumMarks = 10;
+        val specialMarks = 3;
+        val marks = Math.max(minimumMarks, width - specialMarks);
+        val sb = new StringBuilder(marks + specialMarks).append('[');
+        val delta = (State.Maximum.value - State.Minimum.value) / marks;
         DoubleStream
                 .iterate(State.Minimum.value, temperature -> temperature + delta)
                 .limit(marks)
