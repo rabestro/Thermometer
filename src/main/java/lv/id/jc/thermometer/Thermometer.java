@@ -13,8 +13,8 @@ import static java.lang.Math.min;
 
 @Getter
 public class Thermometer implements Formattable {
-    private Thermometer(final double scale, final State state) {
-        this.scale = scale;
+    private Thermometer(final double value, final State state) {
+        this.value = value;
         this.state = state;
     }
 
@@ -36,7 +36,7 @@ public class Thermometer implements Formattable {
         }
     }
 
-    private final double scale;
+    private final double value;
     private final State state;
 
     public static Thermometer of(final double temperature) {
@@ -50,7 +50,7 @@ public class Thermometer implements Formattable {
 
     @Override
     public String toString() {
-        return String.format("%+5.1f° %s", scale, state);
+        return String.format("%+5.1f° %s", value, state);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class Thermometer implements Formattable {
             output = String.format(stateTemplate, stateName);
         } else {
             final var degreeWidth = precision == 0 ? 3 : 4 + precision;
-            final var degreeValue = isAlternate ? scale * 1.8 + 32 : scale;
+            final var degreeValue = isAlternate ? value * 1.8 + 32 : value;
             final var degreeSymbol = isAlternate ? "F" : "C";
             final var degreeTemplate = "%1$+" + degreeWidth + "." + precision + "f°" + degreeSymbol;
             output = String.format(degreeTemplate, degreeValue);
@@ -88,7 +88,7 @@ public class Thermometer implements Formattable {
         DoubleStream
                 .iterate(State.Minimum.value, temperature -> temperature + delta)
                 .limit(marks)
-                .forEach(temperature -> sb.append(temperature < this.scale ? 'o' : '-'));
+                .forEach(temperature -> sb.append(temperature < this.value ? 'o' : '-'));
         sb.insert(marks / 2 + 1, '|');
         sb.append(']');
         return sb.toString();
