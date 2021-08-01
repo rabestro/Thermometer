@@ -51,7 +51,7 @@ public class Thermometer implements Formattable {
 
     @Override
     public String toString() {
-        return String.format("%+5.1f° %s", value, state);
+        return String.format("%+5.1f°C %s", value, state);
     }
 
     @Override
