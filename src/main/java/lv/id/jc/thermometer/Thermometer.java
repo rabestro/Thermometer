@@ -12,7 +12,7 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 @Getter
-public class Thermometer implements Formattable {
+public class Thermometer extends Number implements Formattable {
     private Thermometer(final double scale, final State state) {
         this.scale = scale;
         this.state = state;
@@ -77,6 +77,26 @@ public class Thermometer implements Formattable {
                 + (isUpperCase ? "S" : "s");
 
         formatter.format(template, output);
+    }
+
+    @Override
+    public int intValue() {
+        return Math.round(floatValue());
+    }
+
+    @Override
+    public long longValue() {
+        return Math.round(scale);
+    }
+
+    @Override
+    public float floatValue() {
+        return (float) scale;
+    }
+
+    @Override
+    public double doubleValue() {
+        return scale;
     }
 
     public String getGraphScale(final int width) {

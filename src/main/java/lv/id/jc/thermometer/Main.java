@@ -1,20 +1,26 @@
 package lv.id.jc.thermometer;
 
+import java.text.MessageFormat;
 import java.util.stream.DoubleStream;
-import java.util.stream.Stream;
 
 public class Main {
     private static final String LINE = "-------------+--------------------------------+%n";
     private static final Substance substance = new Substance();
 
     public static void main(String[] args) {
-        printCard();
+        printNumber();
     }
 
-    
+
     static Thermometer thermometer() {
         substance.waitSomeTime();
         return Thermometer.of(substance.getTemperature());
+    }
+
+    static void printNumber() {
+//        System.out.printf("%f%n", thermometer());
+        System.out.println(thermometer());
+        System.out.println(MessageFormat.format("Thermometer: {0}, {0,number}", thermometer()));
     }
 
     static void printCard() {
