@@ -3,14 +3,28 @@ package lv.id.jc.thermometer;
 import lombok.val;
 import lv.id.jc.thermometer.format.ScaleFormatter;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.DoubleStream;
 
 public class Main {
     private static final String LINE = "-------------+--------------------------------+%n";
     private static final Substance substance = new Substance();
 
-    public static void main(String[] args) {
-        printGraph();
+    public static void main(String[] args) throws InterruptedException {
+        val substance = new Substance();
+        val recorder = new Recorder(substance);
+        val laboratory = new Laboratory(substance, recorder);
+        val scheduler = Executors.newScheduledThreadPool(3);
+        scheduler.scheduleAtFixedRate(substance, 500, 1000, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(recorder, 1, 5, TimeUnit.SECONDS);
+        val cc = new Thread(laboratory);
+        cc.start();
+        cc.join();
+
+        scheduler.shutdown();
+        scheduler.shutdownNow();
+        System.out.println("Goodbye!");
     }
 
     static void printGraph() {
@@ -21,7 +35,6 @@ public class Main {
     }
 
     static Thermometer thermometer() {
-        substance.waitSomeTime();
         return Thermometer.of(substance.getTemperature());
     }
 
