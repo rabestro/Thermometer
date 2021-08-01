@@ -3,17 +3,17 @@ package lv.id.jc.thermometer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.val;
+import lv.id.jc.thermometer.format.Scale;
 
 import java.util.Formattable;
 import java.util.FormattableFlags;
 import java.util.Formatter;
-import java.util.stream.DoubleStream;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 @Getter
-public class Thermometer implements Formattable {
+public class Thermometer implements Formattable, Scale {
     private Thermometer(final double value, final State state) {
         this.value = value;
         this.state = state;
@@ -80,18 +80,14 @@ public class Thermometer implements Formattable {
         formatter.format(template, output);
     }
 
-    public String getGraphScale(final int width) {
-        val minimumMarks = 10;
-        val specialMarks = 3;
-        val marks = Math.max(minimumMarks, width - specialMarks);
-        val sb = new StringBuilder(marks + specialMarks).append('[');
-        val delta = (State.Maximum.value - State.Minimum.value) / marks;
-        DoubleStream
-                .iterate(State.Minimum.value, temperature -> temperature + delta)
-                .limit(marks)
-                .forEach(temperature -> sb.append(temperature < this.value ? 'o' : '-'));
-        sb.insert(marks / 2 + 1, '|');
-        sb.append(']');
-        return sb.toString();
+    @Override
+    public double getMinimum() {
+        return State.Minimum.value;
     }
+
+    @Override
+    public double getMaximum() {
+        return State.Maximum.value;
+    }
+
 }

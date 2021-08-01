@@ -1,17 +1,25 @@
 package lv.id.jc.thermometer;
 
+import lombok.val;
+import lv.id.jc.thermometer.format.ScaleFormatter;
+
 import java.util.stream.DoubleStream;
-import java.util.stream.Stream;
 
 public class Main {
     private static final String LINE = "-------------+--------------------------------+%n";
     private static final Substance substance = new Substance();
 
     public static void main(String[] args) {
-        printCard();
+        printGraph();
     }
 
-    
+    static void printGraph() {
+        val thermometer = thermometer();
+        val chartFormatter = new ScaleFormatter(43);
+        val chart = chartFormatter.format(thermometer);
+        System.out.printf("%.1s %s%n", thermometer, chart);
+    }
+
     static Thermometer thermometer() {
         substance.waitSomeTime();
         return Thermometer.of(substance.getTemperature());
