@@ -1,40 +1,43 @@
-Thermometer,Format                                  ,Expected Output
+Thermometer,Format                                   ,Expected Output
 # comment:, if no precision specified, then only state is printed
--50        ,%s                                      ,Minimum
--50        ,%S                                      ,MINIMUM
--50        ,%#s                                     ,minimum
--50        ,%1S                                     ,M
--45        ,%s                                      ,Low
--45        ,%#s                                     ,low
--29        ,%#s                                     ,normal
--11        ,%s                                      ,Normal
-0          ,(%#1s)                                  ,(n)
-4          ,(%1S)                                   ,(N)
-15         ,`%10s`                                  ,`    Normal`
-19         ,[%-10s]                                 ,[Normal    ]
-50         ,[%-10s]                                 ,[Maximum   ]
-49         ,[%-10s]                                 ,[High      ]
--39        ,[%-10s]                                 ,[Low       ]
--50        ,[%-10s]                                 ,[Minimum   ]
-24         ,[%10S]                                  ,[    NORMAL]
-24         ,[%-10S]                                 ,[NORMAL    ]
-30         ,%#s                                     ,High
-50         ,%#s                                     ,Maximum
--51.23     ,%.1s                                    ,-50.0°C
--49.99     ,%.1s                                    ,-50.0°C
--50        ,%#.1s                                   ,-58.0°F
--39.28     ,%.1s                                    ,-39.3°C
--39.28     ,%.2s                                    ,-39.28°C
--39.28     ,%.3s                                    ,-39.280°C
--10.2      ,[%12.1s]                                ,[    -10.2°C]
--10.2      ,[%-12.1s]                               ,[-10.2°C    ]
--0.01      ,[%-12.1s]                               ,[ -0.0°C    ]
--0.01      ,[%12.1s]                                ,[     -0.0°C]
--0         ,[%12.1s]                                ,[     -0.0°C]
-0          ,[%12.1s]                                ,[     +0.0°C]
-0          ,[%#12.1s]                               ,[    +32.0°F]
+-50        ,%s                                       ,Minimum
+-50        ,%S                                       ,MINIMUM
+-50        ,%#s                                      ,minimum
+-50        ,%1S                                      ,M
+-45        ,%s                                       ,Low
+-45        ,%#s                                      ,low
+30         ,%s                                       ,High
+50         ,%s                                       ,Maximum
+-29        ,%#s                                      ,normal
+-11        ,%s                                       ,Normal
+0          ,(%#1s)                                   ,(n)
+4          ,(%1S)                                    ,(N)
+15         ,[%10s]                                   ,[    Normal]
+19         ,[%-10s]                                  ,[Normal    ]
+50         ,[%-10s]                                  ,[Maximum   ]
+49         ,[%-10s]                                  ,[High      ]
+-39        ,[%-10s]                                  ,[Low       ]
+-50        ,[%-10s]                                  ,[Minimum   ]
+24         ,[%10S]                                   ,[    NORMAL]
+24         ,[%-10S]                                  ,[NORMAL    ]
+-51.23     ,%.1s                                     ,-50.0°C
+-49.99     ,%.1s                                     ,-50.0°C
+-50        ,%#.1s                                    ,-58.0°F
+-39.28     ,%.1s                                     ,-39.3°C
+-39.28     ,%.2s                                     ,-39.28°C
+-39.28     ,%.3s                                     ,-39.280°C
+-10.2      ,[%12.1s]                                 ,[    -10.2°C]
+-10.2      ,[%-12.1s]                                ,[-10.2°C    ]
+-0.01      ,[%-12.1s]                                ,[ -0.0°C    ]
+-0.01      ,[%12.1s]                                 ,[     -0.0°C]
+-0         ,[%12.1s]                                 ,[     -0.0°C]
+0          ,[%12.1s]                                 ,[     +0.0°C]
+0          ,[%#12.1s]                                ,[    +32.0°F]
 # you may reffer, to the argument many times, and create complex formats
-0          ,%1$.1s = %1$#.1s                        ," +0.0°C = +32.0°F"
-48.5       ,"Temperature is %1$s: %1$.1s / %1$#.1s.","Temperature is high: +48.5°C / +119.3°F."
+0          ,%1$.1s = %1$#.1s                         ," +0.0°C = +32.0°F"
+48.5       ,"Temperature is %1$#s: %1$.1s / %1$#.1s.","Temperature is high: +48.5°C / +119.3°F."
+50         ,"Temperature is %1$#s: %1$.0s / %1$#.0s.","Temperature is maximum: +50°C / +122°F."
+-50        ,"Temperature is %1$#s: %1$.0s / %1$#.0s.","Temperature is minimum: -50°C / -58°F."
+-31        ,"Temperature is %1$#s: %1$.0s / %1$#.0s.","Temperature is low: -31°C / -24°F."
 
 
