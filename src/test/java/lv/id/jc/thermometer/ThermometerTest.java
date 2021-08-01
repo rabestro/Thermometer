@@ -1,5 +1,6 @@
 package lv.id.jc.thermometer;
 
+import lv.id.jc.thermometer.format.ScaleFormatter;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -66,7 +67,7 @@ class ThermometerTest {
     @ParameterizedTest(name = "Width: {0}, Temperature: {1}°, Graph: {2}")
     @CsvFileSource(resources = "/graph-scale.csv", numLinesToSkip = 1, encoding = "windows-1252")
     void getGraphScale(final int width, final Thermometer thermometer, final String expected) {
-        assertEquals(expected, thermometer.getGraphScale(width));
+        assertEquals(expected, new ScaleFormatter(width).format(thermometer));
     }
 
 }
