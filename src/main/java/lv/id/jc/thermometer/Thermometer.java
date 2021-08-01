@@ -61,7 +61,7 @@ public class Thermometer implements Formattable {
         final String output;
 
         if (precision == -1) {
-            final var stateName = isAlternate ? state.name() : state.name().toLowerCase();
+            final var stateName = isAlternate ? state.name().toLowerCase() : state.name();
             final var stateTemplate = "%" + (width > 0 ? "." + width : "") + "s";
             output = String.format(stateTemplate, stateName);
         } else {
