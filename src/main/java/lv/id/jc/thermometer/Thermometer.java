@@ -64,13 +64,13 @@ public class Thermometer implements Formattable, Scale {
         if (precision == -1) {
             val stateName = isAlternate ? state.name().toLowerCase() : state.name();
             val stateTemplate = "%" + (width > 0 ? "." + width : "") + "s";
-            output = String.format(stateTemplate, stateName);
+            output = stateTemplate.formatted(stateName);
         } else {
             val degreeWidth = precision == 0 ? 3 : 4 + precision;
             val degreeValue = isAlternate ? value * 1.8 + 32 : value;
             val degreeSymbol = isAlternate ? "F" : "C";
             val degreeTemplate = "%1$+" + degreeWidth + "." + precision + "f°" + degreeSymbol;
-            output = String.format(degreeTemplate, degreeValue);
+            output = degreeTemplate.formatted(degreeValue);
         }
         val template = "%"
                 + (isLeftJustify ? "-" : "")
