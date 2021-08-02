@@ -50,8 +50,7 @@ class ThermometerTest {
         @ParameterizedTest(name = "Temperature: {1}°, \"{0}\" = {2}")
         @CsvFileSource(resources = "/tostring-format.csv", numLinesToSkip = 1, encoding = "windows-1252")
         void testToStringPlusFormat(final String format, final Thermometer thermometer, final String expected) {
-            final var toString = String.valueOf(thermometer);
-            final var actual = String.format(format, toString);
+            final var actual = format.formatted(String.valueOf(thermometer));
             assertEquals(expected, actual);
         }
     }
@@ -60,7 +59,7 @@ class ThermometerTest {
     @ParameterizedTest(name = "Temperature: {0}°, Format: \"{1}\", Expected: {2}")
     @CsvFileSource(resources = "/thermometer-format-to.csv", numLinesToSkip = 1, encoding = "windows-1252")
     void formatTo(final Thermometer thermometer, final String format, final String expected) {
-        assertEquals(expected, String.format(format, thermometer));
+        assertEquals(expected, format.formatted(thermometer));
     }
 
     @DisplayName("should plot graphic scale")
